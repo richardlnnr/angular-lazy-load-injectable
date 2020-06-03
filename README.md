@@ -1,27 +1,50 @@
-# AngularLazyLoadInjectable
+# Angular Elements with Lazy load and provider injectable
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
-
-## Development server
+This project was generated to demonstrate an issue in Angular Elements when you use lazy loaded module and don't use providedIn: 'root' in a service.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Problem
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+When we start the application, the following error is displayed on the browser console:
+That problem only happen when the component is exported as a Custom Element.
 
-## Build
+```
+core.js:6228 ERROR NullInjectorError: R3InjectorError(AppModule)[ContentService -> ContentService -> ContentService]: 
+  NullInjectorError: No provider for ContentService!
+    at NullInjector.get (http://localhost:4200/vendor.js:8310:27)
+    at R3Injector.get (http://localhost:4200/vendor.js:22304:33)
+    at R3Injector.get (http://localhost:4200/vendor.js:22304:33)
+    at R3Injector.get (http://localhost:4200/vendor.js:22304:33)
+    at NgModuleRef$1.get (http://localhost:4200/vendor.js:39605:33)
+    at Object.get (http://localhost:4200/vendor.js:37339:35)
+    at getOrCreateInjectable (http://localhost:4200/vendor.js:12112:39)
+    at Module.ɵɵdirectiveInject (http://localhost:4200/vendor.js:26119:12)
+    at NodeInjectorFactory.ContentComponent_Factory [as factory] (http://localhost:4200/feature-feature-module.js:26:162)
+    at getNodeInjectable (http://localhost:4200/vendor.js:12257:44)
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+ERROR Error: Uncaught (in promise): NullInjectorError: R3InjectorError(AppModule)[ContentService -> ContentService -> ContentService]: 
+  NullInjectorError: No provider for ContentService!
+NullInjectorError: R3InjectorError(AppModule)[ContentService -> ContentService -> ContentService]: 
+  NullInjectorError: No provider for ContentService!
+    at NullInjector.get (core.js:1085)
+    at R3Injector.get (core.js:16955)
+    at R3Injector.get (core.js:16955)
+    at R3Injector.get (core.js:16955)
+    at NgModuleRef$1.get (core.js:36329)
+    at Object.get (core.js:33972)
+    at getOrCreateInjectable (core.js:5848)
+    at Module.ɵɵdirectiveInject (core.js:21103)
+    at NodeInjectorFactory.ContentComponent_Factory [as factory] (content.component.ts:9)
+    at getNodeInjectable (core.js:5993)
+    at resolvePromise (zone-evergreen.js:798)
+    at resolvePromise (zone-evergreen.js:750)
+    at zone-evergreen.js:860
+    at ZoneDelegate.invokeTask (zone-evergreen.js:399)
+    at Object.onInvokeTask (core.js:41632)
+    at ZoneDelegate.invokeTask (zone-evergreen.js:398)
+    at Zone.runTask (zone-evergreen.js:167)
+    at drainMicroTaskQueue (zone-evergreen.js:569)
+```
