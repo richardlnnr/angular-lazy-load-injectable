@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
     AppRoutingModule
   ],
   providers: [],
-  entryComponents: [AppComponent]
 })
 export class AppModule {
   constructor(private readonly injector: Injector) {
