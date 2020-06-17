@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FeatureComponent } from './feature.component';
-import { ContentComponent } from './content/content.component';
 
 const routes: Routes = [
   {
@@ -12,7 +11,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'content' },
       {
         path: 'content',
-        component: ContentComponent
+        loadChildren: () => import('./content/content.module').then(m => m.ContentModule)
       },
     ]
   }
