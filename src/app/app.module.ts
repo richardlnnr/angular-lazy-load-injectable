@@ -13,13 +13,14 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule
   ],
+  bootstrap: [AppComponent],
   providers: [],
 })
 export class AppModule {
-  constructor(private readonly injector: Injector) {
-    const el = createCustomElement(AppComponent, { injector: this.injector });
-    customElements.define('element-injectable', el);
-  }
+  // constructor(private readonly injector: Injector) {
+  //   const el = createCustomElement(AppComponent, { injector: this.injector });
+  //   customElements.define('element-injectable', el);
+  // }
 
-  ngDoBootstrap() {}
+  // ngDoBootstrap() {}
 }
